@@ -20,6 +20,7 @@ jobs:
                 include:
                     - node-version: 16
                       operating-system: ubuntu-latest
+                # That one will excluse a specific matrix
                 exclude:
                     - node-version: 18
                       operating-system: windows-latest
