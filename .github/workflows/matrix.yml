@@ -19,10 +19,10 @@ jobs:
                 # it will build for node 16 on linux, but not on windowx
                 include:
                     - node-version: 16
-                    operating-system: ubuntu-latest
+                      operating-system: ubuntu-latest
                 exclude:
                     - node-version: 18
-                    operating-system: windows-latest
+                      operating-system: windows-latest
         runs-on: ${{ matrix.operating-system }}
         steps:
             - name: Get Code
