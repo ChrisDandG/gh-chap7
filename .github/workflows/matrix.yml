@@ -2,6 +2,11 @@ name: Matrix Demo
 on: push
 jobs:
     build:
+        # Useful as it will not stop other combination from running if one fails
+        # for instance, if node 18 ubutun-latest fails, it would usually
+        # stop the node 18 windows-latest
+        # with continue-on-error set to true at the job level, that won't happen
+        continue-on-error: true
         # Using strategy like that, this job will run for
         # Node 18 on ubuntu-latest, Node 18 on windows-latest
         # Node 20 on ubuntu-latest, Node 18 on windows-latest
@@ -10,6 +15,14 @@ jobs:
             matrix:
                 node-version: [18, 20, 22]
                 operating-system: [ubuntu-latest, windows-latest]
+                # You can include specific combination, like here
+                # it will build for node 16 on linux, but not on windowx
+                include:
+                    - node-version: 16
+                    operating-system: ubuntu-latest
+                exclude:
+                    - node-version: 18
+                    operating-system: windows-latest
         runs-on: ${{ matrix.operating-system }}
         steps:
             - name: Get Code
